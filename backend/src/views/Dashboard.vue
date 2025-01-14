@@ -1,5 +1,5 @@
 <template>
-  <h1>Login Form</h1>
+  <h1>Dashboard View</h1>
   
 </template>
 
