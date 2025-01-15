@@ -1,6 +1,5 @@
 <template>
 
-    <Guest-Layout title="Sign in to your account">
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" action="#" method="POST">
@@ -34,7 +33,7 @@
           <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Sign up</a>
         </p>
       </div>
-    </Guest-Layout>
+
   </template>
 
 
