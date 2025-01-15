@@ -2,9 +2,7 @@
    <div class="min-h-full flex">
 
 <!-- Sidebar -->
-<div class="w-[200px] bg-blue-700">
-  Sidebar
-</div>
+<Sidebar></Sidebar>
 <!-- End Sidebar -->
 
 <div class="flex-1">
@@ -27,6 +25,8 @@
     </template>
 
     <script setup>
+
+    import Sidebar from '@/components/Sidebar.vue'
 
     const {title} = defineProps({
 
