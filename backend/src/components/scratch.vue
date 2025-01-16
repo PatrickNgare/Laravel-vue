@@ -1,14 +1,6 @@
 <template>
-   <header class="h-16 bg-white shadow">
-
-    <button>
-
-        <Bars3Icon/>
-    </button>
-    <div>
-        https://randomuser.me/api/portraits/men/14.jpg
-
-        <Menu as="div" class="relative inline-block text-left">
+    <div class="fixed w-56 text-right top-16">
+      <Menu as="div" class="relative inline-block text-left">
         <div>
           <MenuButton
             class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white rounded-md bg-black/20 hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
@@ -117,23 +109,15 @@
           </MenuItems>
         </transition>
       </Menu>
-
-
     </div>
-   </header>
+  </template>
 
-</template>
-
-        <script setup>
-   import { Bars3Icon } from '@heroicons/vue/24/outline';
-   import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
-  import { ChevronDownIcon } from '@heroicons/vue/24/solid';
-
-        </script>
-
-
-        <style scoped>
-
-
-
-        </style>
+  <script setup>
+  import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+  import { ChevronDownIcon } from '@heroicons/vue/24/solid'
+  import ArchiveIcon from './archive-icon.vue'
+  import DuplicateIcon from './duplicate-icon.vue'
+  import MoveIcon from './move-icon.vue'
+  import EditIcon from './edit-icon.vue'
+  import DeleteIcon from './delete-icon.vue'
+  </script>
