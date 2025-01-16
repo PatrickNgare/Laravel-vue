@@ -38,12 +38,12 @@
                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                   ]"
                 >
-                  <EditIcon
+                  <UserIcon
                     :active="active"
                     class="w-5 h-5 mr-2 text-violet-400"
                     aria-hidden="true"
                   />
-                  Edit
+                  Profile
                 </button>
               </MenuItem>
               <MenuItem v-slot="{ active }">
@@ -53,62 +53,12 @@
                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                   ]"
                 >
-                  <DuplicateIcon
+                  <ArrowRightStartOnRectangleIcon
                     :active="active"
                     class="w-5 h-5 mr-2 text-violet-400"
                     aria-hidden="true"
                   />
-                  Duplicate
-                </button>
-              </MenuItem>
-            </div>
-            <div class="px-1 py-1">
-              <MenuItem v-slot="{ active }">
-                <button
-                  :class="[
-                    active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                  ]"
-                >
-                  <ArchiveIcon
-                    :active="active"
-                    class="w-5 h-5 mr-2 text-violet-400"
-                    aria-hidden="true"
-                  />
-                  Archive
-                </button>
-              </MenuItem>
-              <MenuItem v-slot="{ active }">
-                <button
-                  :class="[
-                    active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                  ]"
-                >
-                  <MoveIcon
-                    :active="active"
-                    class="w-5 h-5 mr-2 text-violet-400"
-                    aria-hidden="true"
-                  />
-                  Move
-                </button>
-              </MenuItem>
-            </div>
-
-            <div class="px-1 py-1">
-              <MenuItem v-slot="{ active }">
-                <button
-                  :class="[
-                    active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                  ]"
-                >
-                  <DeleteIcon
-                    :active="active"
-                    class="w-5 h-5 mr-2 text-violet-400"
-                    aria-hidden="true"
-                  />
-                  Delete
+                  Logout
                 </button>
               </MenuItem>
             </div>
@@ -123,9 +73,9 @@
 </template>
 
         <script setup>
-   import { Bars3Icon } from '@heroicons/vue/24/outline';
+   import {  Bars3Icon } from '@heroicons/vue/24/outline';
    import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
-  import { ChevronDownIcon } from '@heroicons/vue/24/solid';
+  import { ArrowRightStartOnRectangleIcon, ChevronDownIcon, UserIcon } from '@heroicons/vue/24/outline';
 
         </script>
 

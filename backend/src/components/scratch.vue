@@ -121,3 +121,5 @@
   import EditIcon from './edit-icon.vue'
   import DeleteIcon from './delete-icon.vue'
   </script>
+import { ChevronDownIcon,Bars3Icon } from '@heroicons/vue/24/solid';
+import { UserIcon,LogoutIcon  } from "@vue-hero-icons/outline"
