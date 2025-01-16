@@ -1,5 +1,5 @@
 <template>
-   <div class="flex min-h-full">
+   <div class="flex min-h-full bg-gray-200">
 
 <!-- Sidebar -->
 <Sidebar></Sidebar>
@@ -11,10 +11,12 @@
   <!-- End Header -->
 
   <!-- Content -->
-  <main>
+  <main class="p-6">
 
-    content
-    <router-view></router-view>
+
+        <router-view></router-view>
+        content
+
   </main>
   <!-- End Content -->
 </div>

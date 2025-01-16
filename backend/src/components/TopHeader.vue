@@ -1,7 +1,7 @@
 <template>
    <header class="flex items-center justify-between bg-white shadow hd-25">
 
-    <button class="p-4">
+    <button class="p-4 text-grey-700">
 
         <Bars3Icon class="w-6"/>
     </button>
