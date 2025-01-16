@@ -1,5 +1,5 @@
 <template>
-   <div class="min-h-full flex">
+   <div class="flex min-h-full">
 
 <!-- Sidebar -->
 <Sidebar></Sidebar>
@@ -7,7 +7,7 @@
 
 <div class="flex-1">
   <!-- Header -->
-  <header class="h-8 shadow bg-white">Header</header>
+<TopHeader></TopHeader>
   <!-- End Header -->
 
   <!-- Content -->
@@ -26,7 +26,8 @@
 
     <script setup>
 
-    import Sidebar from '@/components/Sidebar.vue'
+    import Sidebar from '@/components/Sidebar.vue';
+    import TopHeader from './TopHeader.vue';
 
     const {title} = defineProps({
 
