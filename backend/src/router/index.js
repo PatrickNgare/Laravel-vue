@@ -19,7 +19,24 @@ const routes = [
                 name:'app.dashboard',
                 component:Dashboard,
                },
+               {
 
+                path:'products',
+                name:'app.products',
+                component:Dashboard,
+               },
+               {
+
+                path:'users',
+                name:'app.users',
+                component:Dashboard,
+               },
+               {
+
+                path:'reports',
+                name:'app.reports',
+                component:Dashboard,
+               },
         ]
     },
 
