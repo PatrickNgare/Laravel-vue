@@ -2,12 +2,12 @@
    <div class="flex min-h-full bg-gray-200">
 
 <!-- Sidebar -->
-<Sidebar></Sidebar>
+<Sidebar :class="{ '-ml-[200px]':!sidebarOpened }"></Sidebar>
 <!-- End Sidebar -->
 
 <div class="flex-1">
   <!-- Header -->
-<TopHeader></TopHeader>
+<TopHeader @toggle-sidebar="toggleSidebar"></TopHeader>
   <!-- End Header -->
 
   <!-- Content -->
@@ -15,7 +15,7 @@
 
 
         <router-view></router-view>
-        content
+        
 
   </main>
   <!-- End Content -->
@@ -27,7 +27,7 @@
     </template>
 
     <script setup>
-
+     import {ref} from 'vue'
     import Sidebar from '@/components/Sidebar.vue';
     import TopHeader from './TopHeader.vue';
 
@@ -37,6 +37,12 @@
 
 
     })
+
+    const sidebarOpened = ref(true);
+    function toggleSidebar(){
+
+        sidebarOpened.value=!sidebarOpened.value
+    }
 
     </script>
 

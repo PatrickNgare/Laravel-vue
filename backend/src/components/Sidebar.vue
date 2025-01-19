@@ -1,6 +1,6 @@
 <template>
 
-<div class="flex flex-col w-64 h-screen text-white bg-indigo-500">
+<div class=" w-[200px] transition-all flex flex-col h-screen text-white bg-indigo-500">
     <!-- Header -->
     <div class="flex items-center justify-center h-16 border-b border-blue-500">
       <h1 class="text-2xl font-semibold">Dashboard</h1>
@@ -66,6 +66,8 @@ import { HomeIcon,UserGroupIcon,
   DocumentIcon,
   ChartBarIcon,
   CogIcon, } from '@heroicons/vue/24/outline';
+
+  
 
     </script>
 

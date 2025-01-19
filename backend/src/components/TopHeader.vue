@@ -1,7 +1,7 @@
 <template>
-   <header class="flex items-center justify-between bg-white shadow hd-25">
+   <header class="flex items-center py-4 justify-between bg-white shadow hd-25">
 
-    <button class="p-4 text-grey-700">
+    <button @click="emit('toggle-sidebar')" class="p-4 text-grey-700 rounded transition-colors hover:bg-black/10">
 
         <Bars3Icon class="w-6"/>
     </button>
@@ -76,12 +76,15 @@
    import {  Bars3Icon } from '@heroicons/vue/24/outline';
    import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
   import { ArrowRightStartOnRectangleIcon, ChevronDownIcon, UserIcon } from '@heroicons/vue/24/outline';
+      
+  const emit=defineEmits(['toggle-sidebar'])
+
 
         </script>
 
 
         <style scoped>
 
-
+      
 
         </style>
