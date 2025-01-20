@@ -6,12 +6,15 @@ import ResetPassword from "@/views/ResetPassword.vue";
 import AppLayout from "../components/AppLayout.vue";
 import Products  from "../components/Products.vue";
 
+import store from '../store';
+
 const routes = [
 
     {
         path:'/app',
         name:'app',
         component:AppLayout,
+        meta:{requireAuth:true },
         children:[
 
             {
@@ -38,13 +41,14 @@ const routes = [
                 name:'app.reports',
                 component:Dashboard,
                },
-        ]
+        ],
     },
 
    {
 
     path:'/login',
     name:'login',
+    meta:{  requiresGuest:true },
     component:Login,
    },
 
@@ -52,19 +56,43 @@ const routes = [
 
     path:'/request-password',
     name:'requestPassword',
+    meta:{requiresGuest:true},
     component:RequestPassword,
    },
    {
 
     path:'/reset-password/:token',
     name:'resetPassword',
+    meta:{requiresGuest:true},
     component:ResetPassword,
    },
+
+{ path: "/:pathMatch(.*)*",
+   redirect:"/login",
+},
+
 ];
 const router=createRouter({
 
     history: createWebHistory(),
-    routes
-})
+    routes,
+});
 
+router.beforeEach((to,from,next)=>{
+
+    if(to.meta.requireAuth && (!store.state.user.token || store.state.user.token === null)){
+        next({name:'login'});
+    }
+    else if(to.meta.requiresGuest && store.state.user.token)
+{
+    next({name:'app.dashboard'});
+}
+else{
+
+    next();
+}
+
+
+
+});
 export default router;
