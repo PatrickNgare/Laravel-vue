@@ -1,7 +1,7 @@
 <template>
-   <header class="flex items-center py-4 justify-between bg-white shadow hd-25">
+   <header class="flex items-center justify-between py-4 bg-white shadow hd-25">
 
-    <button @click="emit('toggle-sidebar')" class="p-4 text-grey-700 rounded transition-colors hover:bg-black/10">
+    <button @click="emit('toggle-sidebar')" class="p-4 transition-colors rounded text-grey-700 hover:bg-black/10">
 
         <Bars3Icon class="w-6"/>
     </button>
@@ -34,13 +34,13 @@
               <MenuItem v-slot="{ active }">
                 <button
                   :class="[
-                    active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                    active ? 'bg-blue-500 text-white' : 'text-gray-900',
                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                   ]"
                 >
                   <UserIcon
                     :active="active"
-                    class="w-5 h-5 mr-2 text-violet-400"
+                    class="w-5 h-5 mr-2 text-blue-500"
                     aria-hidden="true"
                   />
                   Profile
@@ -49,13 +49,13 @@
               <MenuItem v-slot="{ active }">
                 <button
                   :class="[
-                    active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                    active ? 'bg-blue-500 text-white' : 'text-gray-900',
                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                   ]"
                 >
                   <ArrowRightStartOnRectangleIcon
                     :active="active"
-                    class="w-5 h-5 mr-2 text-violet-400"
+                    class="w-5 h-5 mr-2 text-blue-500"
                     aria-hidden="true"
                   />
                   Logout
@@ -76,7 +76,7 @@
    import {  Bars3Icon } from '@heroicons/vue/24/outline';
    import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
   import { ArrowRightStartOnRectangleIcon, ChevronDownIcon, UserIcon } from '@heroicons/vue/24/outline';
-      
+
   const emit=defineEmits(['toggle-sidebar'])
 
 
@@ -85,6 +85,6 @@
 
         <style scoped>
 
-      
+
 
         </style>
