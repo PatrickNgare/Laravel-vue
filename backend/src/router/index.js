@@ -67,8 +67,12 @@ const routes = [
     component:ResetPassword,
    },
 
-{ path: "/:pathMatch(.*)*",
-   redirect:"/login",
+{ path: '/:pathMatch(.*)',
+   redirect:'notfound',
+   component:NotFound,
+   
+
+
 },
 
 ];
@@ -80,7 +84,7 @@ const router=createRouter({
 
 router.beforeEach((to,from,next)=>{
 
-    if(to.meta.requireAuth && (!store.state.user.token || store.state.user.token === null)){
+    if(to.meta.requireAuth && !store.state.user.token ){
         next({name:'login'});
     }
     else if(to.meta.requiresGuest && store.state.user.token)
