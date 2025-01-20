@@ -5,6 +5,8 @@ import RequestPassword from "@/views/RequestPassword.vue";
 import ResetPassword from "@/views/ResetPassword.vue";
 import AppLayout from "../components/AppLayout.vue";
 import Products  from "../components/Products.vue";
+import NotFound from "@/views/NotFound.vue";
+
 
 import store from '../store';
 
@@ -67,29 +69,27 @@ const routes = [
     component:ResetPassword,
    },
 
-{ path: '/:pathMatch(.*)',
-   redirect:'notfound',
-   component:NotFound,
-   
-
-
+   {
+    path: '/:pathMatch(.*)*',
+    name: 'notfound',
+    component: NotFound,
 },
 
 ];
 const router=createRouter({
 
     history: createWebHistory(),
-    routes,
-});
+    routes
+})
 
 router.beforeEach((to,from,next)=>{
 
     if(to.meta.requireAuth && !store.state.user.token ){
-        next({name:'login'});
+        next({name:'login'})
     }
     else if(to.meta.requiresGuest && store.state.user.token)
 {
-    next({name:'app.dashboard'});
+    next({name:'app.dashboard'})
 }
 else{
 
@@ -98,5 +98,6 @@ else{
 
 
 
-});
+})
+
 export default router;
