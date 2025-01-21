@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\HasApiTokens;
 
 class AuthController extends Controller
 {
@@ -22,5 +23,26 @@ class AuthController extends Controller
              'message'=>'Email or Password is incorrect'
             ], 422);
         }
+        $user=Auth::user();
+        if(!$user->is_admin){
+            Auth::logout();
+            return response([
+                'message'=>'You dont have permission to authenticate as admin'
+            ],483);
+        }
+    $token=$user->createToken('main')->plainToken;
+    return response([
+        'user'=>$user,
+        'token'=>$token
+    ]);
     }
+
+    public function logout(){
+        $user=Auth::user();
+        $user->currentAccessToken()->delete();
+        return response(' ', 204);
+
+    }
+
 }
+
