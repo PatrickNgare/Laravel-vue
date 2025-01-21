@@ -2,7 +2,7 @@
 
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="mt-8 space-y-6"  method="POST"  @submit.prevent="login">
           <div>
             <label for="email" class="block font-medium text-gray-900 text-sm/6">Email address</label>
             <div class="mt-2">
@@ -46,13 +46,21 @@
 
 
 <script setup>
-
+import { ref } from 'vue';
 import GuestLayout from '../components/GuestLayout.vue';
+import store from '../store';
+
+let loading = ref(false);
+let errMsg = ref("");
 
 const user={
     email:'',
     password:'',
     rememeber:false
+}
+function login(){
+  loading.value=true
+  store.dispatch('login',user)
 }
 
 </script>
