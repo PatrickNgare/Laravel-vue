@@ -51,7 +51,7 @@ import GuestLayout from '../components/GuestLayout.vue';
 import store from '../store';
 
 let loading = ref(false);
-let errMsg = ref("");
+let errorMsg = ref("");
 
 const user={
     email:'',
@@ -61,6 +61,14 @@ const user={
 function login(){
   loading.value=true
   store.dispatch('login',user)
+  .then(()=>{
+    loading.value=false;
+    router.push({name:'app.dashboard'})
+  })
+  .catch(({response})=>{
+    loading.value=false;
+    errorMsg.value=response.data.message;
+  })
 }
 
 </script>
