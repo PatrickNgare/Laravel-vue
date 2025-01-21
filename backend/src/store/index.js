@@ -6,7 +6,7 @@ const store =createStore({
     state:{
         
         user:{
-            token:12345,
+            token:null,
             data:{}
         }
     },
