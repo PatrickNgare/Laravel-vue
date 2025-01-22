@@ -12,8 +12,8 @@ Route::get('/user',function(Request $request){
 });
 
 Route::post('/logout',[\App\Http\Controllers\AuthController::class,'logout']);
-});
 
+});
 
 
 Route::post('/login',[\App\Http\Controllers\AuthController::class,'login']);
