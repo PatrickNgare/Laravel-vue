@@ -22,11 +22,11 @@
             </div>
           </div>
 
-          
+
         <div class="flex items-center">
           <input id="remember-me" name="remember-me" type="checkbox" v-model="user.remember"
-                 class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
-          <label for="remember-me" class="ml-2 block text-sm text-gray-900"> Remember me </label>
+                 class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"/>
+          <label for="remember-me" class="block ml-2 text-sm text-gray-900"> Remember me </label>
         </div>
 
           <div>
@@ -49,6 +49,7 @@
 import { ref } from 'vue';
 import GuestLayout from '../components/GuestLayout.vue';
 import store from '../store';
+import router from '../router';
 
 let loading = ref(false);
 let errorMsg = ref("");

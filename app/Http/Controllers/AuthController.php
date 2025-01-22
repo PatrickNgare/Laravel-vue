@@ -10,38 +10,43 @@ class AuthController extends Controller
 {
     public function login(Request $request){
 
-        $credentails= $request->validate([
-         'email'=>['required','email'],
-         'password' =>'required',
-         'remember'=>'boolean',
-
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required',
+            'remember' => 'boolean',
         ]);
-        $remember=$credentails['remember'] ?? false;
-        unset($credentails['remember']);
-        if (!Auth::attempt($credentails,$remember)){
+        $remember = $credentials['remember'] ?? false;
+        unset($credentials['remember']);
+
+        if (!Auth::attempt($credentials, $remember)) {
             return response([
-             'message'=>'Email or Password is incorrect'
+                'message' => 'Email or Password is incorrect'
             ], 422);
         }
-        $user=Auth::user();
-        if(!$user->is_admin){
+
+        $user = Auth::user();
+        if (!$user->is_admin) {
             Auth::logout();
             return response([
-                'message'=>'You dont have permission to authenticate as admin'
-            ],483);
+                'message' => 'You don\'t have permission to authenticate as admin'
+            ], 403);
         }
-    $token=$user->createToken('main')->plainToken;
-    return response([
-        'user'=>$user,
-        'token'=>$token
-    ]);
+
+        // Generate a Sanctum token for the user
+        $token = $user->createToken('main')->plainTextToken;
+
+        // Return the user and token in the response
+        return response([
+            'user' => $user,
+            'token' => $token
+        ]);
     }
 
-    public function logout(){
-        $user=Auth::user();
+    public function logout()
+    {
+        $user = Auth::user();
         $user->currentAccessToken()->delete();
-        return response(' ', 204);
-
+        return response('', 204);
     }
 
 }
