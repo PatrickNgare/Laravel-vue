@@ -3,8 +3,14 @@
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="mt-8 space-y-6"  method="POST"  @submit.prevent="login">
-          <div v-if="errorMsg" class="flex items-center justify-center px-5 py-3 text-white bg-red-500 rounded " >
+          <div v-if="errorMsg" class="flex items-center justify-between px-5 py-3 text-white bg-red-500 rounded " >
             <p>{{errorMsg}}</p>
+            <span @click="errorMsg= ''" class="flex items-center justify-center w-8 h-8 transition-colors rounded-full cursor-pointer hover:bg-black/20 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+
+            </span>
           </div>
           <div>
             <label for="email" class="block font-medium text-gray-900 text-sm/6">Email address</label>
