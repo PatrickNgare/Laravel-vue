@@ -1,7 +1,7 @@
-const store ={ 
+const store ={
 
     user:{
-        token:sessionStorage.getItem('TOKEN'),
+        token:localStorage.getItem('TOKEN'),
         data:{}
     }
 

@@ -5,7 +5,7 @@ import router from "./router";
 
 
 const axiosClient = axios.create({
-    
+
     baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`
 })
 
@@ -20,7 +20,7 @@ axiosClient.interceptors.response.use(response => {
     },
     error => {
         if (error.response.status === 401) {
-            sessionStorage.removeItem('TOKEN')
+            localStorage.removeItem('TOKEN')
             router.push({name: 'login'});
         }
         throw error;
