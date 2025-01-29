@@ -6,9 +6,9 @@ const store ={
     },
     products:{
         loading:false,
-        data:[],
+        data: [],
 
     }
 
-}
+};
  export default store

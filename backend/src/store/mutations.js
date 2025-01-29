@@ -16,5 +16,5 @@ else{
 export function setProducts(state, [loading,data]){
 
     state.products.loading=loading;
-    state.prodcuts.data=data
+    state.products.data=data;
 }

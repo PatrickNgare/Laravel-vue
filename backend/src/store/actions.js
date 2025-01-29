@@ -39,9 +39,15 @@ export function logout({ commit, state }) {
 
 
 export function getProducts({commit}){
+      commit('setProducts', [true])
+    return axiosClient.get('products')
+    .then(res=>{
+        commit('setProducts', [false, res.data])
+        return res.data;
 
-    return axiosClient.get('product')
-    .then(=>{
-        
+    })
+    .catch(()=>{
+        commit('setProducts', [false])
+
     })
 }

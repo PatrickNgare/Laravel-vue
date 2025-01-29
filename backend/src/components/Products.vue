@@ -75,7 +75,7 @@
 <script setup>
 
 import { computed,onMounted, ref } from 'vue';
-import store from '../store/state';
+import store from '../store/index.js';
 
 const perPage = ref(10);
 const search = ref('');
@@ -84,7 +84,7 @@ const products = computed(() => store.state.products);
 
 onMounted(() => {
     getProducts();
-});
+})
 
 function getProducts() {
 
