@@ -13,8 +13,8 @@ else{
 }
 }
 
-export function setProducts(state, [loading,data]){
+export function setProducts(state, [loading,response = {}]){
 
     state.products.loading=loading;
-    state.products.data=data;
+    state.products.data=response.data;
 }

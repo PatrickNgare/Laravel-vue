@@ -1,6 +1,7 @@
 <template>
+
    <div class='flex items-center justify-between mb-3'>
-    <hi class=" text-3xl font-semibold">Products</hi>
+    <h1 class=" text-3xl font-semibold">Products</h1>
 
     <button class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ">
         Add product
@@ -38,7 +39,7 @@
 
     </div>
 
-    <Spinner v-if="products.Loading" class="mt-4" />
+    <Spinner v-if="products.loading" class="mt-4" />
     <template v-else>
 
         <table class="table-auto w-full">
@@ -55,8 +56,8 @@
                 <tr v-for="product of products.data" >
                 <td class="border-b p-2 ">{{ product.id }}</td>
         <td class="border-b p-2 ">
-          <img v-if="product.image_url" class="w-16 h-16 object-cover" :src="product.image_url" :alt="product.title">
-          <img v-else class="w-16 h-16 object-cover" src="../../assets/noimage.png">
+            <img class="w-16 h-16 object-cover" :src="product.image" :alt="product.title">
+
         </td>
         <td class="border-b p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis"> {{ product.title }}</td>
         <td class="border-b p-2"> {{ product.price }} </td>
@@ -76,6 +77,7 @@
 
 import { computed,onMounted, ref } from 'vue';
 import store from '../store/index.js';
+import Spinner from './core/Spinner.vue';
 
 const perPage = ref(10);
 const search = ref('');
