@@ -36,3 +36,12 @@ export function logout({ commit, state }) {
         throw error; // Propagate the error
     });
 }
+
+
+export function getProducts({commit}){
+
+    return axiosClient.get('product')
+    .then(=>{
+        
+    })
+}

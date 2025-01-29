@@ -38,12 +38,58 @@
 
     </div>
 
+    <Spinner v-if="products.Loading" class="mt-4" />
+    <template v-else>
+
+        <table class="table-auto w-full">
+            <thead>
+                <tr>
+                    <th class="border-b-2 p-2 text-left">Id</th>
+                    <th class="border-b-2 p-2 text-left">Image</th>
+                    <th class="border-b-2 p-2 text-left">Title</th>
+                    <th class="border-b-2 p-2 text-left">Price</th>
+                    <th class="border-b-2 p-2 text-left">Last Updated At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="product of products.data" >
+                <td class="border-b p-2 ">{{ product.id }}</td>
+        <td class="border-b p-2 ">
+          <img v-if="product.image_url" class="w-16 h-16 object-cover" :src="product.image_url" :alt="product.title">
+          <img v-else class="w-16 h-16 object-cover" src="../../assets/noimage.png">
+        </td>
+        <td class="border-b p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis"> {{ product.title }}</td>
+        <td class="border-b p-2"> {{ product.price }} </td>
+        <td class="border-b p-2 "> {{ product.updated_at }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </template>
+
 </div>
 
 </template>
 
 
 <script setup>
+
+import { computed,onMounted, ref } from 'vue';
+import store from '../store/state';
+
+const perPage = ref(10);
+const search = ref('');
+const products = computed(() => store.state.products);
+
+
+onMounted(() => {
+    getProducts();
+});
+
+function getProducts() {
+
+    store.dispatch('getProducts');
+}
 
 </script>
 
