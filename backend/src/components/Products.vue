@@ -1,5 +1,5 @@
 <template>
-
+ {{products}}
    <div class='flex items-center justify-between mb-3'>
     <h1 class=" text-3xl font-semibold">Products</h1>
 
