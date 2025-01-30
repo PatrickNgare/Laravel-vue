@@ -19,13 +19,13 @@ export function setProducts(state, [loading,response = null]){
 
         state.products={
             data:response.data,
-            links:response.links,
-            total:response.total,
-            limit:response.per_page,
-            from:response.from,
-            to:response.to,
-            page:response.current_page,
-            
+            links:response.meta.links,
+            total:response.meta.total,
+            limit:response.meta.per_page,
+            from:response.meta.from,
+            to:response.meta.to,
+            page:response.meta.current_page,
+
 
 
         }
@@ -33,4 +33,4 @@ export function setProducts(state, [loading,response = null]){
     state.products.loading=loading;
 
 }
-    
+
