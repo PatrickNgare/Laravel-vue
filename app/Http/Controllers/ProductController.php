@@ -18,13 +18,13 @@ class ProductController extends Controller
 
         $search=request('search',false);
         $perPage=request('per_page',10);
-        $prodcuts = Product::query();
+        $query = Product::query();
         if($search){
-            $prodcuts->where('title','like',"%{$search}%")
+            $query->where('title','like',"%{$search}%")
             ->orWhere('description','like',"%{$search}%");
         }
          
-        return ProductListResource::collection($prodcuts->paginate($perPage));
+        return ProductListResource::collection($query->paginate($perPage));
     }
 
     /**
