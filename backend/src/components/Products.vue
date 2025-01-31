@@ -122,7 +122,11 @@ onMounted(() => {
 
 function getProducts(url = null) {
 
-    store.dispatch('getProducts',{url});
+    store.dispatch('getProducts',{
+    url,
+     search: search.value,
+     perPage: perPage.value
+});
 }
 
 
