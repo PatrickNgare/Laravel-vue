@@ -44,11 +44,13 @@
         <table class="table-auto w-full">
             <thead>
                 <tr>
-                    <th class="border-b-2 p-2 text-left">Id</th>
-                    <th class="border-b-2 p-2 text-left">Image</th>
-                    <th class="border-b-2 p-2 text-left">Title</th>
-                    <th class="border-b-2 p-2 text-left">Price</th>
-                    <th class="border-b-2 p-2 text-left">Last Updated At</th>
+
+                    
+                    <TableHeaderCell class="border-b-2 p-2 text-left">Id</TableHeaderCell>
+                    <TableHeaderCell class="border-b-2 p-2 text-left">Image</TableHeaderCell>
+                    <TableHeaderCell class="border-b-2 p-2 text-left">Title</TableHeaderCell>
+                    <TableHeaderCell class="border-b-2 p-2 text-left">Price</TableHeaderCell>
+                    <TableHeaderCell class="border-b-2 p-2 text-left">Last Updated At</TableHeaderCell>
                 </tr>
             </thead>
             <tbody>
