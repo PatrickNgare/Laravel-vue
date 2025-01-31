@@ -15,9 +15,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::query()->paginate(10);
 
-        return ProductListResource::collection($products);
+        $search=request('search',false);
+        $perPage=request('per_page',10);
+        $prodcuts = Product::query();
+        if($search){
+            $prodcuts->where('title','like',"%{$search}%")
+            ->orWhere('description','like',"%{$search}%");
+        }
+         
+        return ProductListResource::collection($prodcuts->paginate($perPage));
     }
 
     /**
@@ -25,7 +32,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        
+
         return new ProductListResource(Product::create($request->validated()));
 
 
@@ -36,7 +43,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        
+
         return new ProductListResource($product);
 
     }

@@ -38,10 +38,12 @@ export function logout({ commit, state }) {
 }
 
 
-export function getProducts({commit},{ url=null }){
+export function getProducts({commit},{ url=null ,search ='', perPage=10}){
       commit('setProducts', [true])
       url=url || '/products';
-    return axiosClient.get(url)
+    return axiosClient.get(url,{
+        params:{ search,per_page:perPage}
+    })
     .then(res=>{
         commit('setProducts', [false, res.data])
         return res.data;
