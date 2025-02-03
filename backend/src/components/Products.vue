@@ -46,11 +46,11 @@
                 <tr>
 
                     
-                    <TableHeaderCell class="border-b-2 p-2 text-left">Id</TableHeaderCell>
-                    <TableHeaderCell class="border-b-2 p-2 text-left">Image</TableHeaderCell>
-                    <TableHeaderCell class="border-b-2 p-2 text-left">Title</TableHeaderCell>
-                    <TableHeaderCell class="border-b-2 p-2 text-left">Price</TableHeaderCell>
-                    <TableHeaderCell class="border-b-2 p-2 text-left">Last Updated At</TableHeaderCell>
+                    <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="id"  :sort-field="sortField" :sort-direction="sortDirection"  >Id</TableHeaderCell>
+                    <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field=" " :sort-field="sortField" :sort-direction="sortDirection">Image</TableHeaderCell>
+                    <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="title" :sort-field="sortField" :sort-direction="sortDirection">Title</TableHeaderCell>
+                    <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="price" :sort-field="sortField" :sort-direction="sortDirection">Price</TableHeaderCell>
+                    <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="updated_at" :sort-field="sortField" :sort-direction="sortDirection">Last Updated At</TableHeaderCell>
                 </tr>
             </thead>
             <tbody>
@@ -116,6 +116,8 @@ import { PRODUCTS_PER_PAGE } from '../constants.js';
 const perPage = ref(PRODUCTS_PER_PAGE);
 const search = ref('');
 const products = computed(() => store.state.products);
+const sortfield= ref('updated_at');
+const sortDirection = ref('desc');
 
 
 onMounted(() => {
@@ -126,6 +128,8 @@ function getProducts(url = null) {
 
     store.dispatch('getProducts',{
     url,
+    sort_field: sortField.value,
+    sort_direction: sortDirection.value,
      search: search.value,
      perPage: perPage.value
 });
@@ -138,6 +142,18 @@ function getForPage(ev, link) {
     }
 
     getProducts(link.url);
+}
+
+function sortProduct(field) {
+    if(sortField !== field ) {
+        sortField.value = field;
+        sortDirection.value = 'asc';
+    }else if(sortDirection === 'asc') {
+        sortDirection.value = 'desc';
+    }else {
+        sortDirection.value = 'asc';
+    }
+
 }
 </script>
 
