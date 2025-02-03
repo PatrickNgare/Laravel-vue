@@ -45,7 +45,7 @@
             <thead>
                 <tr>
 
-                    
+
                     <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="id"  :sort-field="sortField" :sort-direction="sortDirection"  >Id</TableHeaderCell>
                     <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field=" " :sort-field="sortField" :sort-direction="sortDirection">Image</TableHeaderCell>
                     <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="title" :sort-field="sortField" :sort-direction="sortDirection">Title</TableHeaderCell>
@@ -112,12 +112,15 @@ import { computed,onMounted, ref } from 'vue';
 import store from '../store/index.js';
 import Spinner from './core/Spinner.vue';
 import { PRODUCTS_PER_PAGE } from '../constants.js';
+import TableHeaderCell from './core/table/TableHeaderCell.vue';
+
 
 const perPage = ref(PRODUCTS_PER_PAGE);
 const search = ref('');
 const products = computed(() => store.state.products);
-const sortfield= ref('updated_at');
+const sortField= ref('updated_at');
 const sortDirection = ref('desc');
+
 
 
 onMounted(() => {
@@ -145,15 +148,17 @@ function getForPage(ev, link) {
 }
 
 function sortProduct(field) {
-    if(sortField !== field ) {
-        sortField.value = field;
-        sortDirection.value = 'asc';
-    }else if(sortDirection === 'asc') {
-        sortDirection.value = 'desc';
-    }else {
-        sortDirection.value = 'asc';
+    if (sortField.value === field ) {
+    if (sortDirection.value === 'desc') {
+      sortDirection.value = 'asc'
+    } else {
+      sortDirection.value = 'desc'
     }
-
+  } else {
+    sortField.value = field;
+    sortDirection.value = 'asc'
+  }
+  getProducts();
 }
 </script>
 
