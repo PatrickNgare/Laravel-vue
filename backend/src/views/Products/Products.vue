@@ -38,8 +38,8 @@
 
     </div>
 
-    <Spinner v-if="products.loading" class="mt-4" />
-    <template v-else>
+
+
 
         <table class="table-auto w-full">
             <thead>
@@ -47,13 +47,23 @@
 
 
                     <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="id"  :sort-field="sortField" :sort-direction="sortDirection"  >Id</TableHeaderCell>
-                    <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field=" " :sort-field="sortField" :sort-direction="sortDirection">Image</TableHeaderCell>
+                    <TableHeaderCell  class="border-b-2 p-2 text-left" field=" " :sort-field="sortField" :sort-direction="sortDirection">Image</TableHeaderCell>
                     <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="title" :sort-field="sortField" :sort-direction="sortDirection">Title</TableHeaderCell>
                     <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="price" :sort-field="sortField" :sort-direction="sortDirection">Price</TableHeaderCell>
                     <TableHeaderCell @click="sortProduct" class="border-b-2 p-2 text-left" field="updated_at" :sort-field="sortField" :sort-direction="sortDirection">Last Updated At</TableHeaderCell>
                 </tr>
             </thead>
-            <tbody>
+
+   <tbody v-if="products.loading ">
+
+    <tr>
+        <td colspan="5">
+            <Spinner v-if="products.loading" class="mt-4" />
+        </td>
+    </tr>
+   </tbody>
+
+            <tbody  v-else>
                 <tr v-for="product of products.data" >
                 <td class="border-b p-2 ">{{ product.id }}</td>
         <td class="border-b p-2 ">
@@ -68,7 +78,11 @@
 
         </table>
 
-     <div class="flex justify-between mt-5">
+
+        <div  v-if="!products.loading" class="flex justify-between itmes-center mt-5">
+
+
+
         <span>
             Showing from {{ products.from  }} to {{ products.to }}
          </span>
@@ -99,9 +113,10 @@
      </div>
 
 
-    </template>
+
 
 </div>
+
 
 </template>
 
@@ -109,10 +124,12 @@
 <script setup>
 
 import { computed,onMounted, ref } from 'vue';
-import store from '../store/index.js';
-import Spinner from './core/Spinner.vue';
-import { PRODUCTS_PER_PAGE } from '../constants.js';
-import TableHeaderCell from './core/table/TableHeaderCell.vue';
+import store from '../../store/index.js';
+import Spinner from '@/components/core/Spinner.vue';
+import { PRODUCTS_PER_PAGE } from '../../constants.js';
+import TableHeaderCell from '@/components/core/Table/TableHeaderCell.vue';
+
+
 
 
 const perPage = ref(PRODUCTS_PER_PAGE);
