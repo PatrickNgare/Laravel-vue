@@ -70,11 +70,29 @@
     DialogTitle,
   } from '@headlessui/vue'
 
-  
+
+const product=ref({
+ id: props.product.id,
+ title: props.product.title,
+ image: props.product.image,
+ description: props.product.description,
+ price:props.product.price,
+
+
+
+})
+
+
+  const loading= ref(false)
   const emit = defineEmits(['update:modelValue'])
   
   const props=defineProps({
-    modelValue:Boolean
+    modelValue:Boolean,
+    product:{
+        required:true,
+        type:Object,
+    }
+
   })
 
   const show=computed({
