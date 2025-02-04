@@ -1,63 +1,105 @@
 <template>
-    <div>
-      <!-- v-if Block -->
-      <div v-if="currentUser.id" class="flex min-h-full bg-gray-200">
-        <!-- Sidebar -->
-        <Sidebar :class="{ '-ml-[200px]': !sidebarOpened }"></Sidebar>
-        <!-- End Sidebar -->
+    
+    <TransitionRoot appear :show="show" as="template">
+      <Dialog as="div" @close="closeModal" class="relative z-10">
+        <TransitionChild
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-black/25" />
+        </TransitionChild>
 
-        <div class="flex-1">
-          <!-- Header -->
-          <Navbar @toggle-sidebar="toggleSidebar"></Navbar>
-          <!-- End Header -->
+        <div class="fixed inset-0 overflow-y-auto">
+          <div
+            class="flex min-h-full items-center justify-center p-4 text-center"
+          >
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+            >
+              <DialogPanel
+                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+              >
 
-          <!-- Content -->
-          <main class="p-6">
-            <router-view></router-view>
-          </main>
-          <!-- End Content -->
+              <Spinner v-if="loading"  class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50" />
+              </DialogPanel>
+            </TransitionChild>
+          </div>class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50"
         </div>
-      </div>
-
-      <!-- v-else Block -->
-      <div v-else class="flex items-center justify-center min-h-screen bg-gray-200">
-        <Spinner/>
-      </div>
-    </div>
+      </Dialog>
+    </TransitionRoot>
   </template>
 
   <script setup>
-  import { ref, onMounted, computed, onUnmounted } from "vue";
-  import Sidebar from "@/components/Sidebar.vue";
-  import Navbar from "./Navbar.vue";
-  import store from "@/store";
-  import Spinner from "@/components/core/Spinner.vue";
+  import { computed, onUpdated, ref } from 'vue'
+  import {
+    TransitionRoot,
+    TransitionChild,
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+  } from '@headlessui/vue'
 
-  const { title } = defineProps({
-    title: String,
-  });
 
-  const sidebarOpened = ref(true);
 
-  const currentUser = computed(() => store.state.user.data);
 
-  function toggleSidebar() {
-    sidebarOpened.value = !sidebarOpened.value;
+  const loading= ref(false)
+
+  const emit = defineEmits(['update:modelValue'])
+  
+  const props=defineProps({
+    modelValue:Boolean,
+    product:{
+        required:true,
+        type:Object,
+    }
+
+  })
+
+const product=ref({
+ id: props.product.id,
+ title: props.product.title,
+ image: props.product.image,
+ description: props.product.description,
+ price:props.product.price,
+})
+
+
+  const show=computed({
+    get:()=>props.modelValue,
+    set:(value)=>emit('update:modelValue',value)
+  })
+
+
+  onUpdated(()=>{
+    product.value={
+        id: props.product.id,
+        title: props.product.title,
+        image: props.product.image,
+        description: props.product.description,
+        price:props.product.price,
+    }
+  })
+
+  function closeModal() {
+    show.value = false
+    emit('close')
   }
 
-  onMounted(() => {
-    store.dispatch("getUser");
-    handleSidebarOpened();
-    window.addEventListener("resize", handleSidebarOpened);
-  });
-
-  onUnmounted(() => {
-    window.removeEventListener("resize", handleSidebarOpened);
-  });
-
-  function handleSidebarOpened() {
-    sidebarOpened.value = window.outerWidth > 768;
-  }
   </script>
 
-  <style scoped></style>
+
+<style scoped>
+
+</style>
+

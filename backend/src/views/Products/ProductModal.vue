@@ -30,38 +30,37 @@
               <DialogPanel
                 class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
               >
-                <DialogTitle
-                  as="h3"
-                  class="text-lg font-medium leading-6 text-gray-900"
-                >
-                  Payment successful
-                </DialogTitle>
-                <div class="mt-2">
-                  <p class="text-sm text-gray-500">
-                    Your payment has been successfully submitted. We’ve sent you
-                    an email with all of the details of your order.
-                  </p>
-                </div>
 
-                <div class="mt-4">
-                  <button
-                    type="button"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    @click="closeModal"
-                  >
-                    Got it, thanks!
-                  </button>
+              <Spinner v-if="loading"  class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50" />
+              <header class="py-3 px-4 flex justify-between items-center" >
+
+                <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
+                    
+                   {{  product.id   ? `Updare product: "${props.product.title}"` : 'Create new product' }}
+                </DialogTitle>
+
+              </header>
+              <form @submit.prevent="onSubmit">
+                <div class=" bg-white px-4 pt-5 pb-4 ">
+
                 </div>
-              </DialogPanel>
+                <footer class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex-row-reverse">
+                  
+
+                </footer>
+
+              </form>
+            
+            </DialogPanel>
             </TransitionChild>
-          </div>
+          </div>class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50"
         </div>
       </Dialog>
     </TransitionRoot>
   </template>
 
   <script setup>
-  import { computed, ref } from 'vue'
+  import { computed, onUpdated, ref } from 'vue'
   import {
     TransitionRoot,
     TransitionChild,
@@ -71,19 +70,10 @@
   } from '@headlessui/vue'
 
 
-const product=ref({
- id: props.product.id,
- title: props.product.title,
- image: props.product.image,
- description: props.product.description,
- price:props.product.price,
-
-
-
-})
 
 
   const loading= ref(false)
+
   const emit = defineEmits(['update:modelValue'])
   
   const props=defineProps({
@@ -95,13 +85,34 @@ const product=ref({
 
   })
 
+const product=ref({
+ id: props.product.id,
+ title: props.product.title,
+ image: props.product.image,
+ description: props.product.description,
+ price:props.product.price,
+})
+
+
   const show=computed({
     get:()=>props.modelValue,
     set:(value)=>emit('update:modelValue',value)
   })
 
+
+  onUpdated(()=>{
+    product.value={
+        id: props.product.id,
+        title: props.product.title,
+        image: props.product.image,
+        description: props.product.description,
+        price:props.product.price,
+    }
+  })
+
   function closeModal() {
     show.value = false
+    emit('close')
   }
 
   </script>
