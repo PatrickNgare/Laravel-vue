@@ -1,6 +1,6 @@
 <template>
     
-    <TransitionRoot appear :show="isOpen" as="template">
+    <TransitionRoot appear :show="show" as="template">
       <Dialog as="div" @close="closeModal" class="relative z-10">
         <TransitionChild
           as="template"
@@ -61,7 +61,7 @@
   </template>
 
   <script setup>
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
   import {
     TransitionRoot,
     TransitionChild,
@@ -70,10 +70,20 @@
     DialogTitle,
   } from '@headlessui/vue'
 
-  const isOpen = ref(false)
+  
+  const emit = defineEmits(['update:modelValue'])
+  
+  const props=defineProps({
+    modelValue:Boolean
+  })
+
+  const show=computed({
+    get:()=>props.modelValue,
+    set:(value)=>emit('update:modelValue',value)
+  })
 
   function closeModal() {
-    isOpen.value = false
+    show.value = false
   }
 
   </script>
