@@ -85,6 +85,7 @@
 
   <script setup>
   import { computed, onUpdated, ref } from 'vue'
+  import store from '@/store/'
   import {
     TransitionRoot,
     TransitionChild,
@@ -155,6 +156,13 @@ const product=ref({
 
    }else{
     store.dispatch('createProduct',product.value)
+    .then(response=>{
+      loading.value=false;
+      if(response.status===201){
+        store.dispatch('getProducts')
+        closeModal()
+      }
+    })
    }
 
   }
