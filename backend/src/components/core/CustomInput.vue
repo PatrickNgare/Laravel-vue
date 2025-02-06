@@ -7,9 +7,43 @@
             class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
         {{ prepend }}
       </span>
+      <template v-else-if="type === 'textarea'">
+      <textarea :name="name"
+                :required="required"
+                :value="props.modelValue"
+                @input="emit('update:modelValue', $event.target.value)"
+                :class="inputClasses"
+                :placeholder="label"></textarea>
+      </template>
 
+      <template v-else-if="type === 'file'">
+        <input :type="type"
+               :name="name"
+               :required="required"
+               :value="props.modelValue"
+               @input="emit('change', $event.target.files[0])"
+               :class="inputClasses"
+               :placeholder="label"/>
+      </template>
+      
+      <template v-else>
+        <input :type="type"
+               :name="name"
+               :required="required"
+               :value="props.modelValue"
+               @input="emit('update:modelValue', $event.target.value)"
+               :class="inputClasses"
+               :placeholder="label"
+               step="0.01"/>
+      </template>
+
+
+      <span v-if="append"
+            class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+        {{ append }}
+      </span>
     </div>
-    
+
 
 </div>
 
