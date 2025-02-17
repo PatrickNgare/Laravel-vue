@@ -11,7 +11,7 @@
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 bg-black/25" />
+          <div class="fixed inset-0 bg-black bg-opacity-75" />
         </TransitionChild>
 
         <div class="fixed inset-0 overflow-y-auto">
@@ -28,7 +28,7 @@
               leave-to="opacity-0 scale-95"
             >
               <DialogPanel
-                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white  text-left align-middle shadow-xl transition-all"
               >
 
               <Spinner v-if="loading"  class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50" />
@@ -39,10 +39,10 @@
                    {{  product.id   ? `Update product: "${props.product.title}"` : 'Create new product' }}
                 </DialogTitle>
 
-                <button click="closeModal()"
+                <button @click="closeModal()"
                 class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0,2)]" >
 
-                
+
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -56,17 +56,18 @@
                 <div class=" bg-white px-4 pt-5 pb-4 ">
                   <CustomInput class="mb-2" v-model="product.title" label="Product Title" />
                   <CustomInput type="file" class="mb-2"  label="Product Image" @change="file => product.image = file"/>
-                  <CustomInput type="textarea" class="mb-2" v-model="product.description" label="Product Description" />
+                  <CustomInput type="textarea" class="mb-2" v-model="product.description" label="Description" />
                   <CustomInput type="number" class="mb-2" v-model="product.price" label="Price" prepend="$"/>
+
                 </div>
                 <footer class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex-row-reverse">
                   <button type="submit" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
                   text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
                     Submit
                   </button>
-                  <button type="button" click="closeModal()" ref="cancelButtonRef"
+                  <button type="button" @click="closeModal()" ref="cancelButtonRef"
                   class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
-                  text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500"> >
+                  text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
 
                     Cancel
                     </button>
@@ -77,7 +78,7 @@
 
             </DialogPanel>
             </TransitionChild>
-          </div>class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50"
+          </div>
         </div>
       </Dialog>
     </TransitionRoot>
@@ -85,7 +86,8 @@
 
   <script setup>
   import { computed, onUpdated, ref } from 'vue'
-  import store from '@/store/'
+  //import store from '@/store/'
+  import store from "../../store/index.js"
   import CustomInput from '@/components/core/CustomInput.vue'
   import {
     TransitionRoot,
@@ -111,7 +113,7 @@
 
   })
 
-const product=ref({
+const product= ref ({
  id: props.product.id,
  title: props.product.title,
  image: props.product.image,
@@ -124,6 +126,8 @@ const product=ref({
     get:()=>props.modelValue,
     set:(value)=>emit('update:modelValue',value)
   })
+
+
 
 
   onUpdated(()=>{
@@ -167,6 +171,8 @@ const product=ref({
    }
 
   }
+
+
 
   </script>
 

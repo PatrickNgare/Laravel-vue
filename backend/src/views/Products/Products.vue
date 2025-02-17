@@ -27,11 +27,11 @@ const showModal = ref(false);
 
 const productModel=ref({
 
-    id: null,
+    id: '',
     title: '',
-    image: '',
+    image: null,
     description: '',
-    price: 0,
+    price: null,
 })
 
 function showProductModal() {
