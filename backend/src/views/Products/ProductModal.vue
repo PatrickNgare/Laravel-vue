@@ -16,7 +16,7 @@
 
         <div class="fixed inset-0 overflow-y-auto">
           <div
-            class="flex min-h-full items-center justify-center p-4 text-center"
+            class="flex items-center justify-center min-h-full p-4 text-center"
           >
             <TransitionChild
               as="template"
@@ -28,13 +28,13 @@
               leave-to="opacity-0 scale-95"
             >
               <DialogPanel
-                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white  text-left align-middle shadow-xl transition-all"
+                class="w-full max-w-md overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl"
               >
 
-              <Spinner v-if="loading"  class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50" />
-              <header class="py-3 px-4 flex justify-between items-center" >
+              <Spinner v-if="loading"  class="absolute top-0 bottom-0 left-0 right-0 z-50 flex items-center justify-center bg-white" />
+              <header class="flex items-center justify-between px-4 py-3" >
 
-                <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
+                <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
 
                    {{  product.id   ? `Update product: "${props.product.title}"` : 'Create new product' }}
                 </DialogTitle>
@@ -43,7 +43,7 @@
                 class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0,2)]" >
 
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
 
@@ -53,21 +53,20 @@
 
               </header>
               <form @submit.prevent="onSubmit">
-                <div class=" bg-white px-4 pt-5 pb-4 ">
+                <div class="col-span-2 px-4 pt-5 pb-4 bg-white ">
                   <CustomInput class="mb-2" v-model="product.title" label="Product Title" />
                   <CustomInput type="file" class="mb-2"  label="Product Image" @change="file => product.image = file"/>
                   <CustomInput type="textarea" class="mb-2" v-model="product.description" label="Description" />
                   <CustomInput type="number" class="mb-2" v-model="product.price" label="Price" prepend="$"/>
+                 
 
                 </div>
-                <footer class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex-row-reverse">
-                  <button type="submit" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
-                  text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
+                <footer class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex-row-reverse">
+                  <button type="submit" class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-white bg-indigo-600 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:bg-indigo-700 focus:ring-indigo-500">
                     Submit
                   </button>
                   <button type="button" @click="closeModal()" ref="cancelButtonRef"
-                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
-                  text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
+                  class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-white bg-indigo-600 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm hover:bg-indigo-700 focus:ring-indigo-500">
 
                     Cancel
                     </button>
@@ -88,6 +87,7 @@
   import { computed, onUpdated, ref } from 'vue'
   //import store from '@/store/'
   import store from "../../store/index.js"
+  import Spinner from "@/components/core/Spinner.vue";
   import CustomInput from '@/components/core/CustomInput.vue'
   import {
     TransitionRoot,
@@ -118,7 +118,7 @@ const product= ref ({
  title: props.product.title,
  image: props.product.image,
  description: props.product.description,
- price:props.product.price,
+ price:props.product.price || 0,
 })
 
 
@@ -136,7 +136,7 @@ const product= ref ({
         title: props.product.title,
         image: props.product.image,
         description: props.product.description,
-        price:props.product.price,
+        price:props.product.price?? 0,
     }
   })
 
